@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>
+			Listagem de aluno cadastrados
+		</title>
+		<link rel="stylesheet" type="text/css" href="css/listagem_alunos_estilo.css"/>
+	</h:head>
+	<h:body>
+			<h1>
+                Universidade Equipe Orbitais
+            </h1>
+        <div class="principal">
+            
+                <h2>
+                    Lista de Alunos:
+                </h2>
+                <div class="secundario">
+                <h:form>
+                	<h3>
+                    	<h:commandLink styleClass="cadastrando" action="#{controllerMBean.preCadastrarAluno}" title="Ir para o formulário de cadastro"><h:graphicImage value="add.png" styleClass="plus" height="20" width="20" alt="Cadastrar Novo Aluno"/>Cadastrar Novo Aluno</h:commandLink>
+                    </h3>
+                	 <h:dataTable value="#{controllerMBean.alunos}" var="aluno" styleClass="tabela">
+                	 	<h:column>
+                       		<f:facet name="header">
+                       			<h:outputText value="Matrícula">
+                       			</h:outputText>
+                       		</f:facet>
+                       		<h:outputText styleClass="dataField" value="#{aluno.matricula}">
+                       		</h:outputText>
+                       	</h:column>
+                       	<h:column>
+                       		<f:facet name="header">
+                       			<h:outputText value="Nome">
+                       			</h:outputText>
+                       		</f:facet>
+                       		<h:outputText styleClass="dataField" value="#{aluno.pessoa.nome}">
+                       		</h:outputText>
+                       	</h:column>
+                       	<h:column>
+                       		<f:facet name="header">
+                       			<h:outputText styleClass="anoIngressoColumn" value="Ano de Ingresso">
+                       			</h:outputText>
+                       		</f:facet>
+                       		<h:outputText styleClass="anoIngresso" value="#{aluno.ano}">
+                       		</h:outputText>
+                       	</h:column>
+                       	<h:column>
+                       		<f:facet name="header">
+                       			<h:outputText value="Ações">
+                       			</h:outputText>
+                       		</f:facet>
+                       		<h:commandButton styleClass="editCommandWithRepeat" action="#{controllerMBean.preEditarAluno}" actionListener="#{controllerMBean.coletarLinhaDoAlunoParaEditar}" image="edit-regular.svg"/> 		
+                	 		<h:commandButton styleClass="deleteCommandWithRepeat" actionListener="#{controllerMBean.removerAluno}" image="trash-solid.svg" onclick="if(!confirm('Deseja realmente deletar o aluno?')){return false;}; return true;"/> 
+                       	</h:column>
+                	 </h:dataTable>
+                </h:form>
+                </div> 
+        </div>
+	</h:body>
+</html>
